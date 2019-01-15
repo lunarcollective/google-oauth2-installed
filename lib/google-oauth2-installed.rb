@@ -6,13 +6,13 @@ require 'google-oauth2-installed/access_token'
 module GoogleOauth2Installed
 
   # A centralized place to access all loaded configuration and defaults.
-  def self.credentials(user_account="")
+  def self.credentials(account_no="")
     {
       method: 'OAuth2',
-      oauth2_client_id: oauth2_client_id(user_account),
-      oauth2_client_secret: oauth2_client_secret(user_account),
-      oauth2_token: oauth2_token(user_account),
-      oauth2_scope: oauth2_scope(user_account),
+      oauth2_client_id: oauth2_client_id(account_no),
+      oauth2_client_secret: oauth2_client_secret(account_no),
+      oauth2_token: oauth2_token(account_no),
+      oauth2_scope: oauth2_scope(account_no),
       oauth2_redirect_uri: 'urn:ietf:wg:oauth:2.0:oob',
       oauth2_urls: {
         authorize_url: 'https://accounts.google.com/o/oauth2/auth',
@@ -21,37 +21,39 @@ module GoogleOauth2Installed
     }
   end
 
-  def self.access_token(user_account="")
-    user_account = "_#{user_account}" unless user_account.blank?
-    creds = credentials(user_account)
+  def self.access_token(account_no="")
+    account_no = "_#{account_no}" unless account_no.blank?
+    creds = credentials(account_no)
     AccessToken.new(creds).access_token
   end
 
   # To be used interactively
-  def self.get_access_token
+  def self.get_access_token(account_no="")
+    account_no = "_#{account_no}" unless account_no.blank?
+    creds = credentials(account_no)
     Setup.new(credentials).get_access_token
   end
 
   private
 
-  def oauth2_client_id(user_account)
-    ENV["OAUTH2_CLIENT_ID#{user_account}"]
+  def self.oauth2_client_id(account_no)
+    ENV["OAUTH2_CLIENT_ID#{account_no}"]
   end
 
-  def oauth2_client_secret(user_account)
-    ENV["OAUTH2_CLIENT_SECRET#{user_account}"]
+  def self.oauth2_client_secret(account_no)
+    ENV["OAUTH2_CLIENT_SECRET#{account_no}"]
   end
 
-  def oauth2_scope(user_account)
-    ENV["OAUTH2_SCOPE#{user_account}"]
+  def self.oauth2_scope(account_no)
+    ENV["OAUTH2_SCOPE#{account_no}"]
   end
 
-  def self.oauth2_token(user_account)
-    if ENV["OAUTH2_ACCESS_TOKEN#{user_account}"]
+  def self.oauth2_token(account_no)
+    if ENV["OAUTH2_ACCESS_TOKEN#{account_no}"]
       {
-        access_token: ENV["OAUTH2_ACCESS_TOKEN#{user_account}"],
-        refresh_token: ENV["OAUTH2_REFRESH_TOKEN#{user_account}"],
-        expires_at: ENV["OAUTH2_EXPIRES_AT#{user_account}"].to_i,
+        access_token: ENV["OAUTH2_ACCESS_TOKEN#{account_no}"],
+        refresh_token: ENV["OAUTH2_REFRESH_TOKEN#{account_no}"],
+        expires_at: ENV["OAUTH2_EXPIRES_AT#{account_no}"].to_i,
       }
     end
   end
