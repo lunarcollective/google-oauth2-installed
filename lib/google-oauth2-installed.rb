@@ -36,7 +36,7 @@ module GoogleOauth2Installed
   private
 
   def self.formatted_acc_no(acc_no)
-    return acc_no if acc_no.trim == ""
+    return acc_no if acc_no.strip == ""
     "_#{acc_no}"
   end
 
