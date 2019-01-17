@@ -6,8 +6,8 @@ require 'google-oauth2-installed/version'
 Gem::Specification.new do |spec|
   spec.name          = "google-oauth2-installed"
   spec.version       = GoogleOauth2Installed::VERSION
-  spec.authors       = ["Amiel Martin", "Kristian Freeman"]
-  spec.email         = ["amiel@carnesmedia.com", "kristian@carnesmedia.com"]
+  spec.authors       = ["Amiel Martin", "Kristian Freeman", "Matt Rice", "Justin Herrick"]
+  spec.email         = ["amiel@carnesmedia.com", "kristian@carnesmedia.com", "matt@lunarcollective.co", "justin@lunarcollective.co"]
   spec.summary       = %q{
     Configure and authenticate to google with OAuth2 as an installed application
   }

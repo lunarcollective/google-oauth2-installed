@@ -3,7 +3,7 @@ require 'forwardable'
 module GoogleOauth2Installed
   # To be used interactively.
   # See `GoogleOauth2Installed.get_access_token`
-  class Setup < Struct.new(:credentials)
+  class Setup < Struct.new(:credentials, :account_no)
 
     def get_access_token
       checks.check_for_environment!
@@ -51,7 +51,7 @@ module GoogleOauth2Installed
     end
 
     def env_vars_for_token(token)
-      names = ["OAUTH2_ACCESS_TOKEN", "OAUTH2_REFRESH_TOKEN", "OAUTH2_EXPIRES_AT"]
+      names = ["OAUTH3_ACCESS_TOKEN#{account_no}", "OAUTH2_REFRESH_TOKEN#{account_no}", "OAUTH2_EXPIRES_AT#{account_no}"]
       values = [token.token, token.refresh_token, token.expires_at].map { |v| "\"#{v}\"" }
 
       names.zip(values)
