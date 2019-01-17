@@ -57,7 +57,7 @@ module GoogleOauth2Installed
   end
 
   def self.oauth2_token(acc_no)
-    if get "OAUTH2_ACCESS_TOKEN#{account_no}"
+    if get "OAUTH2_ACCESS_TOKEN#{acc_no}"
       {
         access_token: get("OAUTH2_ACCESS_TOKEN#{acc_no}"),
         refresh_token: ge("OAUTH2_REFRESH_TOKEN#{acc_no}"),
