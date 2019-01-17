@@ -66,7 +66,7 @@ module GoogleOauth2Installed
     end
   end
 
-  def get(key)
+  def self.get(key)
     value = ENV[key]
     return value if value
     puts "#{key} not found in ENV"
