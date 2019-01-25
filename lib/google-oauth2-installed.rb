@@ -30,7 +30,6 @@ module GoogleOauth2Installed
   def self.get_access_token(account_no = "")
     acc_no = formatted_acc_no(account_no)
     creds  = credentials(acc_no)
-    binding.pry
     Setup.new(creds, acc_no).get_access_token
   end
 
