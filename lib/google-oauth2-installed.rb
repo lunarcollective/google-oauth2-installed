@@ -30,6 +30,7 @@ module GoogleOauth2Installed
   def self.get_access_token(account_no = "")
     acc_no = formatted_acc_no(account_no)
     creds  = credentials(acc_no)
+    binding.pry
     Setup.new(creds, acc_no).get_access_token
   end
 
@@ -60,7 +61,7 @@ module GoogleOauth2Installed
     if get "OAUTH2_ACCESS_TOKEN#{acc_no}"
       {
         access_token: get("OAUTH2_ACCESS_TOKEN#{acc_no}"),
-        refresh_token: ge("OAUTH2_REFRESH_TOKEN#{acc_no}"),
+        refresh_token: get("OAUTH2_REFRESH_TOKEN#{acc_no}"),
         expires_at: get("OAUTH2_EXPIRES_AT#{acc_no}").to_i,
       }
     end

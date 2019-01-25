@@ -70,4 +70,3 @@ module GoogleOauth2Installed
     def_delegator '$stdout', :puts
   end
 end
-
